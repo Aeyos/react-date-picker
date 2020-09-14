@@ -530,7 +530,7 @@ export default class DateInput extends PureComponent {
 
   renderCustomInputs() {
     const { placeholder } = this;
-    const { format } = this.props;
+    const { format, onFocusEvent } = this.props;
 
     const elementFunctions = {
       d: this.renderDay,
@@ -539,6 +539,15 @@ export default class DateInput extends PureComponent {
     };
 
     const allowMultipleInstances = typeof format !== 'undefined';
+
+    if (!this.state.day && !this.state.month && !this.state.year && this.props.placeholder) {
+      return (
+        <div onClick={onFocusEvent}>
+          {this.props.placeholder}
+        </div>
+      );
+    }
+
     return renderCustomInputs(placeholder, elementFunctions, allowMultipleInstances);
   }
 
@@ -614,6 +623,8 @@ DateInput.propTypes = {
   name: PropTypes.string,
   nativeInputAriaLabel: PropTypes.string,
   onChange: PropTypes.func,
+  onFocusEvent: PropTypes.func,
+  placeholder: PropTypes.string,
   required: PropTypes.bool,
   returnValue: PropTypes.oneOf(['start', 'end', 'range']),
   showLeadingZeros: PropTypes.bool,

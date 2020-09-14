@@ -134,6 +134,7 @@ export default class DatePicker extends PureComponent {
       monthPlaceholder,
       name,
       nativeInputAriaLabel,
+      placeholder,
       required,
       returnValue,
       showLeadingZeros,
@@ -174,10 +175,12 @@ export default class DatePicker extends PureComponent {
           minDate={minDate}
           name={name}
           onChange={this.onChange}
+          placeholder={placeholder}
           required={required}
           returnValue={returnValue}
           showLeadingZeros={showLeadingZeros}
           value={valueFrom}
+          onFocusEvent={this.onFocus}
         />
         {clearIcon !== null && (
           <button
@@ -345,6 +348,7 @@ DatePicker.propTypes = {
   onCalendarOpen: PropTypes.func,
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
+  placeholder: PropTypes.string,
   required: PropTypes.bool,
   returnValue: PropTypes.oneOf(['start', 'end', 'range']),
   showLeadingZeros: PropTypes.bool,
